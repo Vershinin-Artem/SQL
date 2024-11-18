@@ -1,1 +1,1 @@
-# -SQL-Simulator---lab.karpov.courses
+Мои проекты на SQL
