@@ -2244,10 +2244,185 @@ GROUP BY pair
 ORDER BY count_pair DESC, pair
 ```
 </details>
+</details>
 
+<details>
+  
+<summary>Решение заданий из тренажера <a href="https://sql-academy.org/ru/trainer">SQL Academy</a>  </summary>
 
+  
+**Задание №1**
 
+Вывести имена всех людей, которые есть в базе данных авиакомпаний
 
+Поля в результирующей таблице:
+**name**
+  
+```sql
+SELECT name
+FROM Passenger
+```
+
+**Задание №2**
+
+Вывести названия всеx авиакомпаний
+
+Поля в результирующей таблице:
+**name**
+  
+```sql
+SELECT name
+FROM Company
+```
+
+**Задание №3**
+
+Вывести все рейсы, совершенные из Москвы
+
+Поля в результирующей таблице:
+*
+  
+```sql
+SELECT *
+FROM Trip
+WHERE town_from = 'Moscow'
+```
+
+**Задание №4**
+
+Вывести имена людей, которые заканчиваются на "man"
+
+Поля в результирующей таблице:
+**name**
+
+  
+```sql
+SELECT name
+FROM Passenger
+WHERE name LIKE '%man'
+```
+
+**Задание №5**
+
+Вывести количество рейсов, совершенных на TU-134
+
+Поля в результирующей таблице:
+**count**
+  
+```sql
+SELECT COUNT(plane) as count
+FROM Trip
+WHERE plane = 'TU-134'
+```
+
+**Задание №6**
+
+Какие компании совершали перелеты на Boeing
+
+Поля в результирующей таблице:
+**name**
+  
+```sql
+SELECT DISTINCT name
+FROM Trip
+	JOIN Company ON Trip.company = Company.id
+WHERE plane = 'Boeing'
+```
+
+**Задание №7**
+
+Вывести все названия самолётов, на которых можно улететь в Москву (Moscow)
+
+Поля в результирующей таблице:
+**plane**
+  
+```sql
+SELECT distinct plane
+FROM Trip
+WHERE town_to = 'Moscow'
+```
+
+**Задание №8**
+
+Парижа (Paris) и сколько времени это займёт?
+
+Поля в результирующей таблице:
+**town_to**
+**flight_time**
+  
+```sql
+SELECT town_to,
+	TIMEDIFF(time_in, time_out) AS flight_time
+FROM Trip
+WHERE town_from = 'Paris'
+```
+
+**Задание №9**
+
+Какие компании организуют перелеты из Владивостока (Vladivostok)?
+Поля в результирующей таблице:
+name
+  
+```sql
+SELECT name
+FROM Trip
+	LEFT JOIN Company ON Trip.company = Company.id
+WHERE town_from = 'Vladivostok'
+```
+
+**Задание №10**
+
+Вывести вылеты, совершенные с 10 ч. по 14 ч. 1 января 1900 г.
+Поля в результирующей таблице:
+*
+  
+```sql
+SELECT *
+FROM Trip
+WHERE time_out BETWEEN '1900-01-01T10:00:00.000Z' AND '1900-01-01T14:00:00.000Z'
+```
+
+**Задание №11**
+
+Выведите пассажиров с самым длинным ФИО. Пробелы, дефисы и точки считаются частью имени.
+Поля в результирующей таблице:
+name
+  
+```sql
+SELECT name
+FROM Passenger
+WHERE LENGTH(name) = (SELECT MAX(LENGTH(name))
+		              FROM Passenger)
+```
+
+**Задание №12**
+
+Выведите идентификаторы всех рейсов и количество пассажиров на них. Обратите внимание, что на каких-то рейсах пассажиров может не быть. В этом случае выведите число "0".
+Поля в результирующей таблице:
+id
+count
+  
+```sql
+SELECT Trip.id,
+	COUNT(passenger) AS count
+FROM Trip
+	LEFT JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+GROUP BY Trip.id
+```
+
+**Задание №13**
+
+Вывести имена людей, у которых есть полный тёзка среди пассажиров
+Поля в результирующей таблице:
+name
+  
+```sql
+SELECT name
+FROM Passenger
+GROUP BY name
+HAVING COUNT(*) > 1
+```
+</details>
 
 
 
