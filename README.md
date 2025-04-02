@@ -2251,177 +2251,586 @@ ORDER BY count_pair DESC, pair
 <summary>Решение заданий из тренажера <a href="https://sql-academy.org/ru/trainer">SQL Academy</a>  </summary>
 
   
-**Задание №1**
+# Задание №1
 
-Вывести имена всех людей, которые есть в базе данных авиакомпаний
+**Задача:** Вывести имена всех людей, которые есть в базе данных авиакомпаний.
 
-Поля в результирующей таблице:
-**name**
-  
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Passenger
 ```
 
-**Задание №2**
+---
 
-Вывести названия всеx авиакомпаний
+# Задание №2
 
-Поля в результирующей таблице:
-**name**
-  
+**Задача:** Вывести названия всех авиакомпаний.
+
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Company
 ```
 
-**Задание №3**
+---
 
-Вывести все рейсы, совершенные из Москвы
+# Задание №3
 
-Поля в результирующей таблице:
-*
-  
+**Задача:** Вывести все рейсы, совершенные из Москвы.
+
+**Поля в результирующей таблице:**
+- `*`
+
 ```sql
 SELECT *
 FROM Trip
 WHERE town_from = 'Moscow'
 ```
 
-**Задание №4**
+---
 
-Вывести имена людей, которые заканчиваются на "man"
+# Задание №4
 
-Поля в результирующей таблице:
-**name**
+**Задача:** Вывести имена людей, которые заканчиваются на "man".
 
-  
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Passenger
 WHERE name LIKE '%man'
 ```
 
-**Задание №5**
+---
 
-Вывести количество рейсов, совершенных на TU-134
+# Задание №5
 
-Поля в результирующей таблице:
-**count**
-  
+**Задача:** Вывести количество рейсов, совершенных на TU-134.
+
+**Поля в результирующей таблице:**
+- `count`
+
 ```sql
-SELECT COUNT(plane) as count
+SELECT COUNT(plane) AS count
 FROM Trip
 WHERE plane = 'TU-134'
 ```
 
-**Задание №6**
+---
 
-Какие компании совершали перелеты на Boeing
+# Задание №6
 
-Поля в результирующей таблице:
-**name**
-  
+**Задача:** Какие компании совершали перелеты на Boeing.
+
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT DISTINCT name
 FROM Trip
-	JOIN Company ON Trip.company = Company.id
+JOIN Company ON Trip.company = Company.id
 WHERE plane = 'Boeing'
 ```
 
-**Задание №7**
+---
 
-Вывести все названия самолётов, на которых можно улететь в Москву (Moscow)
+# Задание №7
 
-Поля в результирующей таблице:
-**plane**
-  
+**Задача:** Вывести все названия самолётов, на которых можно улететь в Москву (Moscow).
+
+**Поля в результирующей таблице:**
+- `plane`
+
 ```sql
-SELECT distinct plane
+SELECT DISTINCT plane
 FROM Trip
 WHERE town_to = 'Moscow'
 ```
 
-**Задание №8**
+---
 
-Парижа (Paris) и сколько времени это займёт?
+# Задание №8
 
-Поля в результирующей таблице:
-**town_to**
-**flight_time**
-  
+**Задача:** Вывести рейсы из Парижа (Paris) и сколько времени это займёт.
+
+**Поля в результирующей таблице:**
+- `town_to`
+- `flight_time`
+
 ```sql
 SELECT town_to,
-	TIMEDIFF(time_in, time_out) AS flight_time
+       TIMEDIFF(time_in, time_out) AS flight_time
 FROM Trip
 WHERE town_from = 'Paris'
 ```
 
-**Задание №9**
+---
 
-Какие компании организуют перелеты из Владивостока (Vladivostok)?
-Поля в результирующей таблице:
-name
-  
+# Задание №9
+
+**Задача:** Какие компании организуют перелеты из Владивостока (Vladivostok)?
+
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Trip
-	LEFT JOIN Company ON Trip.company = Company.id
+LEFT JOIN Company ON Trip.company = Company.id
 WHERE town_from = 'Vladivostok'
 ```
 
-**Задание №10**
+---
 
-Вывести вылеты, совершенные с 10 ч. по 14 ч. 1 января 1900 г.
-Поля в результирующей таблице:
-*
-  
+# Задание №10
+
+**Задача:** Вывести вылеты, совершенные с 10 ч. по 14 ч. 1 января 1900 г.
+
+**Поля в результирующей таблице:**
+- `*`
+
 ```sql
 SELECT *
 FROM Trip
 WHERE time_out BETWEEN '1900-01-01T10:00:00.000Z' AND '1900-01-01T14:00:00.000Z'
 ```
 
-**Задание №11**
+---
 
-Выведите пассажиров с самым длинным ФИО. Пробелы, дефисы и точки считаются частью имени.
-Поля в результирующей таблице:
-name
-  
+# Задание №11
+
+**Задача:** Вывести пассажиров с самым длинным ФИО. Пробелы, дефисы и точки считаются частью имени.
+
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Passenger
-WHERE LENGTH(name) = (SELECT MAX(LENGTH(name))
-		              FROM Passenger)
+WHERE LENGTH(name) = (SELECT MAX(LENGTH(name)) FROM Passenger)
 ```
 
-**Задание №12**
+---
 
-Выведите идентификаторы всех рейсов и количество пассажиров на них. Обратите внимание, что на каких-то рейсах пассажиров может не быть. В этом случае выведите число "0".
-Поля в результирующей таблице:
-id
-count
-  
+# Задание №12
+
+**Задача:** Вывести идентификаторы всех рейсов и количество пассажиров на них. Если пассажиров нет, вывести 0.
+
+**Поля в результирующей таблице:**
+- `id`
+- `count`
+
 ```sql
 SELECT Trip.id,
-	COUNT(passenger) AS count
+       COUNT(passenger) AS count
 FROM Trip
-	LEFT JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+LEFT JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
 GROUP BY Trip.id
 ```
 
-**Задание №13**
+---
 
-Вывести имена людей, у которых есть полный тёзка среди пассажиров
-Поля в результирующей таблице:
-name
-  
+# Задание №13
+
+**Задача:** Вывести имена людей, у которых есть полный тёзка среди пассажиров.
+
+**Поля в результирующей таблице:**
+- `name`
+
 ```sql
 SELECT name
 FROM Passenger
 GROUP BY name
 HAVING COUNT(*) > 1
 ```
+
+---
+
+# Задание №14
+
+**Задача:** В какие города летал Bruce Willis.
+
+**Поля в результирующей таблице:**
+- `town_to`
+
+```sql
+SELECT town_to
+FROM Trip
+INNER JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+INNER JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+WHERE name = 'Bruce Willis'
+```
+
+---
+
+# Задание №15
+
+**Задача:** Вывести идентификатор пассажира Стив Мартин (Steve Martin) и дату и время его прилёта в Лондон (London).
+
+**Поля в результирующей таблице:**
+- `id`
+- `time_in`
+
+```sql
+SELECT Passenger.id,
+       time_in
+FROM Trip
+INNER JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+INNER JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+WHERE town_to = 'London'
+  AND name = 'Steve Martin'
+```
+
+---
+
+# Задание №16
+
+**Задача:** Вывести отсортированный по количеству перелетов (по убыванию) и имени (по возрастанию) список пассажиров, совершивших хотя бы 1 полет.
+
+**Поля в результирующей таблице:**
+- `name`
+- `count`
+
+```sql
+SELECT name,
+       COUNT(trip) AS count
+FROM Pass_in_trip
+INNER JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+GROUP BY name
+ORDER BY count DESC, name
+```
+
+---
+
+# Задание №17
+
+**Задача:** Определить, сколько потратил в 2005 году каждый из членов семьи. Не выводить тех, кто ничего не потратил.
+
+**Поля в результирующей таблице:**
+- `member_name`
+- `status`
+- `costs`
+
+```sql
+SELECT member_name,
+       status,
+       SUM(unit_price * amount) AS costs
+FROM FamilyMembers
+LEFT JOIN Payments ON FamilyMembers.member_id = Payments.family_member
+WHERE YEAR(date) = 2005
+GROUP BY member_name, status
+```
+
+---
+
+# Задание №18
+
+**Задача:** Вывести имя самого старшего человека. Если таких несколько, вывести их всех.
+
+```sql
+SELECT member_name
+FROM FamilyMembers
+WHERE birthday = (SELECT MIN(birthday) FROM FamilyMembers)
+```
+# Задание №19
+
+**Задача:** Определить, кто из членов семьи покупал картошку (potato).
+
+**Поля в результирующей таблице:**
+- `status`
+
+```sql
+SELECT DISTINCT status
+FROM FamilyMembers
+	LEFT JOIN Payments ON FamilyMembers.member_id = Payments.family_member
+	JOIN Goods ON Payments.good = Goods.good_id
+WHERE good_name = 'potato'
+```
+---
+
+# Задание №20
+
+**Задача:** Сколько и кто из семьи потратил на развлечения (entertainment). Вывести статус в семье, имя, сумму
+
+**Поля в результирующей таблице:**
+- `status`
+- `member_name`
+- `costs`
+
+```sql
+SELECT status,
+	member_name,
+	SUM(unit_price * amount) AS costs
+FROM FamilyMembers
+	LEFT JOIN Payments ON FamilyMembers.member_id = Payments.family_member
+	JOIN Goods ON Payments.good = Goods.good_id
+	JOIN GoodTypes ON Goods.type = GoodTypes.good_type_id
+WHERE good_type_name = 'entertainment'
+GROUP BY member_name,
+	status
+```
+---
+# Задание №21
+
+**Задача:** Определить товары, которые покупали более 1 раза
+
+**Поля в результирующей таблице:**
+- `good_name`
+
+```sql
+SELECT good_name
+FROM Goods
+	LEFT JOIN Payments ON Goods.good_id = Payments.good
+GROUP BY good_name
+HAVING COUNT(good_name) > 1
+```
+---
+# Задание №22
+
+**Задача:** Найти имена всех матерей (mother)
+
+**Поля в результирующей таблице:**
+- `member_name`
+
+```sql
+SELECT member_name
+FROM FamilyMembers
+WHERE status = 'mother'
+GROUP BY member_name
+```
+---
+
+# Задание №23
+
+**Задача:** Найдите самый дорогой деликатес (delicacies) и выведите его цену
+
+**Поля в результирующей таблице:**
+- `good_name`
+- `unit_price`
+
+```sql
+SELECT good_name,
+	unit_price
+FROM Goods
+	INNER JOIN Payments ON Goods.good_id = Payments.good
+	INNER JOIN GoodTypes ON Goods.type = GoodTypes.good_type_id
+WHERE good_type_name = 'delicacies'
+ORDER BY unit_price DESC
+LIMIT 1
+```
+Альтернативное решение
+
+```sql
+WITH
+t1 AS (SELECT good_name, unit_price
+       FROM Goods
+       INNER JOIN Payments
+       ON Goods.good_id=Payments.good
+       INNER JOIN GoodTypes
+       ON Goods.type = GoodTypes.good_type_id
+       WHERE good_type_name = 'delicacies')
+
+SELECT good_name, unit_price
+FROM t1
+WHERE unit_price IN (SELECT MAX(unit_price) FROM t1)
+```
+---
+
+# Задание №24
+
+**Задача:** Определить кто и сколько потратил в июне 2005
+
+**Поля в результирующей таблице:**
+- `member_name`
+- `costs`
+
+```sql
+SELECT member_name,
+	   SUM(amount * unit_price) AS costs
+FROM FamilyMembers
+	INNER JOIN Payments ON FamilyMembers.member_id = Payments.family_member
+WHERE date > '2005-05-31' and date < '2005-07-01'
+GROUP BY member_name
+```
+# Задание №25
+
+**Задача:** Определить, какие товары не покупались в 2005 году
+
+**Поля в результирующей таблице:**
+- `good_name`
+
+```sql
+WITH t1 AS (SELECT good_name
+            FROM Goods
+            JOIN Payments ON Goods.good_id = Payments.good
+            WHERE YEAR(date) = 2005)
+    
+SELECT good_name
+FROM Goods
+WHERE good_name NOT IN(SELECT good_name
+        		       FROM t1)
+```
+
+# Задание №26
+
+**Задача:** Определить группы товаров, которые не приобретались в 2005 году
+
+**Поля в результирующей таблице:**
+- `good_type_name`
+
+```sql
+WITH t1 AS (SELECT good_type_name
+            FROM GoodTypes
+            JOIN Goods ON GoodTypes.good_type_id = Goods.type
+            JOIN Payments ON Goods.good_id = Payments.good
+            WHERE YEAR(date) = 2005)
+    
+SELECT good_type_name
+FROM GoodTypes
+WHERE good_type_name NOT IN(SELECT good_type_name
+                		    FROM t1)
+```
+
+# Задание №27
+
+**Задача:** Узнайте, сколько было потрачено на каждую из групп товаров в 2005 году. Выведите название группы и потраченную на неё сумму. Если потраченная сумма равна нулю, т.е. товары из этой группы не покупались в 2005 году, то не выводите её.
+
+**Поля в результирующей таблице:**
+- `good_type_name`, `costs`
+
+```sql
+SELECT good_type_name,
+	SUM(unit_price * amount) AS costs
+FROM Payments
+	JOIN Goods ON Payments.good = Goods.good_id
+	JOIN GoodTypes ON Goods.type = GoodTypes.good_type_id
+WHERE YEAR(date) = 2005
+GROUP BY good_type_name
+```
+
+# Задание №28
+
+**Задача:** Сколько рейсов совершили авиакомпании из Ростова (Rostov) в Москву (Moscow) ?
+
+**Поля в результирующей таблице:**
+- `count`
+
+```sql
+SELECT count(*) as count
+FROM Trip
+WHERE town_from = 'Rostov'
+	AND town_to = 'Moscow'
+```
+
+# Задание №29
+
+**Задача:** Выведите имена пассажиров улетевших в Москву (Moscow) на самолете TU-134. В ответе не должно быть дубликатов.
+
+**Поля в результирующей таблице:**
+- `name`
+
+```sql
+SELECT DISTINCT name
+FROM Trip
+	JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip
+	JOIN Passenger ON Pass_in_trip.passenger = Passenger.id
+WHERE town_to = 'Moscow'
+	AND plane = 'TU-134'
+```
+
+# Задание №30
+
+**Задача:** Выведите нагруженность (число пассажиров) каждого рейса (trip). Результат вывести в отсортированном виде по убыванию нагруженности.
+
+**Поля в результирующей таблице:**
+- `trip`, `count`
+
+```sql
+SELECT trip,
+	COUNT(passenger) as count
+FROM Pass_in_trip
+GROUP BY trip
+ORDER BY count DESC
+```
+
+# Задание №31
+
+**Задача:** Вывести всех членов семьи с фамилией Quincey.
+
+**Поля в результирующей таблице:**
+- `*`
+
+```sql
+SELECT *
+FROM FamilyMembers
+WHERE member_name LIKE '%Quincey'
+```
+
+# Задание №32
+
+**Задача:** Вывести средний возраст людей (в годах), хранящихся в базе данных. Результат округлите до целого в меньшую сторону.
+
+**Поля в результирующей таблице:**
+- `age`
+
+```sql
+SELECT FLOOR(
+		AVG(TIMESTAMPDIFF(YEAR, birthday, CURRENT_TIMESTAMP))
+	) AS age
+FROM FamilyMembers;
+```
+
+# Задание №33
+
+**Задача:** Найдите среднюю цену икры на основе данных, хранящихся в таблице Payments. В базе данных хранятся данные о покупках красной (red caviar) и черной икры (black caviar). В ответе должна быть одна строка со средней ценой всей купленной когда-либо икры.
+
+**Поля в результирующей таблице:**
+- `cost`
+
+```sql
+SELECT AVG(unit_price) as cost
+FROM Payments
+	JOIN Goods ON Payments.good = Goods.good_id
+WHERE good_name = 'black caviar'
+	OR good_name = 'red caviar'
+```
+
+# Задание №34
+
+**Задача:** Сколько всего 10-ых классов
+
+**Поля в результирующей таблице:**
+- `count`
+
+```sql
+SELECT COUNT(name) as count
+FROM class
+WHERE name like '10%'
+```
+
+# Задание №35
+
+**Задача:** Сколько различных кабинетов школы использовались 2 сентября 2019 года для проведения занятий?
+
+**Поля в результирующей таблице:**
+- `count`
+
+```sql
+SELECT COUNT(DISTINCT classroom) as count
+FROM Schedule
+WHERE DATE(date) = '2019-09-02'
+```
+
+
+
+
+
 </details>
 
 
