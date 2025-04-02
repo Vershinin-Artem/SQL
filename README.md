@@ -1,4 +1,8 @@
-![Описание изображения](https://timeweb.com/ru/community/article/e1/e1babb9aae4344a9d9709b990ab39e6a.jpg)
+<img 
+    src="https://timeweb.com/ru/community/article/e1/e1babb9aae4344a9d9709b990ab39e6a.jpg" 
+    alt="Описание" 
+    style="height:400px; width:1100px; object-fit: fill;"
+/>
 
 
 # Решение заданий на SQL
