@@ -1,3 +1,6 @@
+![Описание изображения](https://timeweb.com/ru/community/article/e1/e1babb9aae4344a9d9709b990ab39e6a.jpg)
+
+
 # Решение заданий на SQL
 <details>
 <summary>Решение заданий из тренажера <a href="https://lab.karpov.courses/learning/152/">Karpov.Courses</a>  </summary>
